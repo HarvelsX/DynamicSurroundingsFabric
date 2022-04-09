@@ -129,6 +129,11 @@ public final class AudioUtilities {
                     // Using 4 aux slots instead of the default 2
                     var attributes = builder.build();
                     final long ctx = ALC10.alcCreateContext(device, attributes);
+                    if (ctx == 0) {
+                        LOGGER.warn("Context cannot be NULL, something seems to have gone wrong :/");
+                        return;
+                    }
+
                     ALC10.alcMakeContextCurrent(ctx);
                     accessor.setContextPointer(ctx);
 
